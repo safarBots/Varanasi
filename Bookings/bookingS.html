@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museum Ticket Booking</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playwrite+FR+Trad:wght@100..400&family=Sevillana&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+@media (min-width: 1024px) {
+    .sevillana-regular {
+        font-family: "Sevillana", cursive;
+        font-weight: 600;
+    }
+
+
+    .container {
+        max-width: 800px;
+    }
+
+    .person-details-form {
+        flex-direction: row;
+    }
+
+    .person-details-form input,
+    .person-details-form select {
+        width: 200px;
+    }
+}
+
+/* Tablet (portrait and landscape) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .container {
+        max-width: 600px;
+        padding: 20px;
+    }
+
+    .flex {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .person-details-form {
+        flex-direction: column;
+    }
+
+    .person-details-form input,
+    .person-details-form select {
+        width: 100%;
+    }
+}
+
+/* Phone (portrait and landscape) */
+@media (max-width: 767px) {
+    .container {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .text-3xl {
+        font-size: 1.75rem;
+    }
+
+    .text-2xl {
+        font-size: 1.5rem;
+    }
+
+    .text-xl {
+        font-size: 1.25rem;
+    }
+
+    .person-details-form {
+        flex-direction: column;
+    }
+
+    .person-details-form input,
+    .person-details-form select {
+        width: 100%;
+    }
+
+    .space-x-4 {
+        margin-bottom: 10px;
+    }
+
+    .text-lg {
+        font-size: 1.125rem;
+    }
+
+    .text-sm {
+        font-size: 0.875rem;
+    }
+}
+    </style>
+</head>
+<body class="bg-gray-400">
+    <div class="container mx-auto mt-10 p-5">
+        <!-- Ticket Booking Section -->
+        <div class="bg-gray-100 rounded-lg shadow-lg p-6">
+            <h1 class="sevillana-regular text-3xl font-bold text-yellow-800 mb-4">Book Your Tickets For Sarnath Museum</h1>
+            
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-700">Ticket Fare</h2>
+                    <p class="text-lg text-gray-500 mt-2">₹ 50 / Ticket</p>
+                </div>
+                <div>
+                    <label for="numTickets" class="text-lg font-semibold text-gray-700">Number of Tickets</label>
+                    <div class="flex items-center mt-2">
+                        <button class="bg-red-600 text-white px-3 py-1 rounded-l-md" id="decrease">-</button>
+                        <input type="number" id="numTickets" value="1" min="1" class="w-16 text-center border-2 border-black focus:outline-none">
+                        <button class="bg-green-600 text-white px-3 py-1 rounded-r-md" id="increase">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="w-full bg-yellow-800 hover:bg-green-700 text-white font-bold py-3 rounded-lg focus:outline-none focus:shadow-outline" onclick="changeLink()"><a id ="pay" href="https://razorpay.me/@safarbots?amount=bMZtQmLjQWplBAmd%2FyQdEA%3D%3D" target="_blank">
+                Pay ₹ <span id="totalAmount">50</span></a>
+            </button>
+        </div>
+
+        <!-- Dynamic Person Details Form Section -->
+        <div class="bg-gray-100 rounded-lg shadow-lg p-6 mt-10" id="personDetailsSection">
+            <h2 class="text-2xl font-bold text-yellow-800 mb-6">Enter Details for Each Ticket</h2>
+            
+            <div id="personDetailsContainer">
+                <!-- Person details will be dynamically inserted here -->
+            </div>
+        </div>
+                <!-- Add-On Options -->
+                <div class="bg-gray-100 rounded-lg shadow-lg p-6 mt-10">
+                    <h2 class="text-2xl font-bold text-yellow-800 mb-6">Additional Booking Options</h2>
+                    
+                    <div class="space-y-6">
+                        <!-- Food Booking -->
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-700">Food Booking</h3>
+                                <p class="text-gray-500 mt-1">Add delicious meals to your visit</p>
+                            </div>
+                            <button class="bg-yellow-500 hover:bg-yellow-400 text-black px-4 py-2 rounded-lg focus:outline-none">Book Now</button>
+                        </div>
+                        
+                        <!-- Guide Booking -->
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-700">Guide Booking</h3>
+                                <p class="text-gray-500 mt-1">Book a professional guide for an enhanced experience</p>
+                            </div>
+                            <button class="bg-yellow-500 hover:bg-yellow-400 text-black px-4 py-2 rounded-lg focus:outline-none">Book Now</button>
+                        </div>
+                        
+                        <!-- Nearby Hotel Booking -->
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-700">Nearby Hotel Booking</h3>
+                                <p class="text-gray-500 mt-1">Find and book nearby hotels for your stay</p>
+                            </div>
+                            <button class="bg-yellow-500 hover:bg-yellow-400 text-black px-4 py-2 rounded-lg focus:outline-none">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+    </div>
+
+    <footer class="bg-yellow-900 text-white py-1">
+        <div class="container mx-auto text-center">
+          <p>&copy; 2024 Museum. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const decreaseButton = document.getElementById('decrease');
+        const increaseButton = document.getElementById('increase');
+        const numTickets = document.getElementById('numTickets');
+        const totalAmount = document.getElementById('totalAmount');
+        const ticketPrice = 50;
+        const personDetailsContainer = document.getElementById('personDetailsContainer');
+
+        // Function to update the total amount
+        function updateTotal() {
+            totalAmount.textContent = numTickets.value * ticketPrice;
+            updatePersonDetailsFields(numTickets.value);
+        }
+
+        // Event listeners for the increase and decrease buttons
+        decreaseButton.addEventListener('click', () => {
+            if (numTickets.value > 1) {
+                numTickets.value = parseInt(numTickets.value) - 1;
+                updateTotal();
+            }
+        });
+
+        increaseButton.addEventListener('click', () => {
+            numTickets.value = parseInt(numTickets.value) + 1;
+            updateTotal();
+        });
+
+        numTickets.addEventListener('input', () => {
+            updateTotal();
+        });
+
+        updateTotal();
+
+        const paymentStart = () => {
+            console.log("Payment Started...");
+            console.log(totalAmount.textContent);
+            // Collect form data here if needed
+        };
+
+        function changeLink() {
+            const linkElement = document.getElementById("pay");
+            if(totalAmount.textContent==100){
+                linkElement.href = 'https://razorpay.me/@safarbots?amount=ZFm4ghdmeB6pF5PK8Ki64w%3D%3D';
+            }
+            else if(totalAmount.textContent==150){
+                linkElement.href = 'https://razorpay.me/@safarbots?amount=T%2FpUAiSSrhOK7IH%2BNk7Kdg%3D%3D';
+            }
+            else if(totalAmount.textContent==200){
+                linkElement.href = 'https://razorpay.me/@safarbots?amount=ExQs%2Fv%2FDDS71hestyV8B7g%3D%3D';
+            }
+            else if(totalAmount.textContent==250){
+                linkElement.href = 'https://razorpay.me/@safarbots?amount=tXBKx4kJbOm3V3bG1ud1bQ%3D%3D';
+            }
+            else if(totalAmount.textContent==300){
+                linkElement.href = 'https://razorpay.me/@safarbots?amount=JRabBs%2BUijZmruPWP7O7uQ%3D%3D';
+            }
+            else if(totalAmount.textContent==350){
+                linkElement.href = 'https://razorpay.me/@safarbots?amount=DTNI%2FKOZSWGw2ETcNsCuHQ%3D%3D';
+            }
+            else if(totalAmount.textContent==400){
+                linkElement.href = 'https://razorpay.me/@safarbots?amount=GjiZndswUahjxyGDJCJTMw%3D%3D';
+            }
+            else if(totalAmount.textContent==450){
+                linkElement.href = 'https://razorpay.me/@safarbots?amount=B3GVR7kTFeLelIPkLbK6rA%3D%3D';
+            }
+            else if(totalAmount.textContent==500){
+                linkElement.href = 'https://razorpay.me/@safarbots?amount=bd6mwPoVV2sRePhB8DGUcw%3D%3D';
+            }
+        }
+
+
+        // Function to update the person details fields
+        function updatePersonDetailsFields(numTickets) {
+            personDetailsContainer.innerHTML = '';
+            for (let i = 1; i <= numTickets; i++) {
+                const personDetailsForm = `
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Person ${i}</h3>
+                    <div class="mb-4 flex space-between space-x-4">
+                        <label for="name_${i}" class="block text-sm font-medium text-gray-700">Name</label>
+                        <input type="text" id="name_${i}" name="name_${i}" class="px-2 mt-1 block w-1/2 border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm" required>
+                        
+                        <label for="age_${i}" class="block text-sm font-medium text-gray-700 mt-2">Age</label>
+                        <input type="number" id="age_${i}" name="age_${i}" class="px-2 mt-1 block w-1/2 border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm" required>
+
+                        <label for="gender_${i}" class="block text-sm font-medium text-gray-700 mt-2">Gender</label>
+                        <select id="gender_${i}" name="gender_${i}" class="px-2 mt-1 block w-1/2 border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm" required>
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+
+                        <label for="date" class="block w-80 text-sm font-medium text-gray-700">Booking Date</label>
+                        <input type="date" id="date" name="date" class="px-2 mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm" required/>
+                    </div>
+                `;
+                personDetailsContainer.insertAdjacentHTML('beforeend', personDetailsForm);
+            }
+        }
+
+    </script>
+    <script src="./jvs.js"></script>
+</body>
+</html>

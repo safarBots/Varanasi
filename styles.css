@@ -1,0 +1,119 @@
+
+/* Tablet (portrait and landscape) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .container {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    .slider img {
+        height: 400px;
+    }
+
+    .pacifico-regular {
+        font-size: 1.75rem;
+    }
+
+    .sevillana-regular {
+        font-size: 2rem;
+    }
+
+    .playwrite-fr-trad {
+        font-size: 1rem;
+    }
+
+    #home h1 {
+        font-size: 3.5rem;
+    }
+
+    #home p {
+        font-size: 1.25rem;
+    }
+
+    #home a {
+        font-size: 1.5rem;
+        padding: 8px 16px;
+    }
+
+    #tickets h2,
+    #slider h2 {
+        font-size: 2.5rem;
+    }
+
+    #tickets form {
+        max-width: 500px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin-bottom: 10px;
+    }
+}
+
+/* Mobile (portrait and landscape) */
+@media (max-width: 767px) {
+    .container {
+        max-width: 100%;
+        padding: 0 15px;
+        margin: 0 auto;
+    }
+
+    .slider img {
+        height: 250px;
+    }
+
+    .pacifico-regular {
+        font-size: 1.5rem;
+    }
+
+    .sevillana-regular {
+        font-size: 1.75rem;
+    }
+
+    .playwrite-fr-trad {
+        font-size: 0.875rem;
+    }
+
+    #home h1 {
+        font-size: 3rem;
+    }
+
+    #home p {
+        font-size: 1rem;
+    }
+
+    #home a {
+        font-size: 1.25rem;
+        padding: 6px 12px;
+    }
+
+    #tickets h2,
+    #slider h2 {
+        font-size: 2rem;
+    }
+
+    #tickets form {
+        max-width: 100%;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin-bottom: 8px;
+    }
+
+    #home {
+        padding: 0 15px;
+    }
+
+    .slider-wrapper {
+        padding: 0 15px;
+    }
+}
