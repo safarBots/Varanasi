@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.ticket-container {
+    width: 90%;
+    max-width: 400px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.ticket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #eee;
+}
+
+.ticket-header h2 {
+    margin: 0;
+}
+
+.share-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.ticket-content {
+    display: flex;
+    padding: 15px;
+}
+
+.ticket-poster {
+    width: 80px;
+    height: 150px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.ticket-details h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.ticket-details p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.support-btn {
+    display: block;
+    background: none;
+    border: none;
+    color: #007bff;
+    padding: 10px 0;
+    cursor: pointer;
+    text-align: left;
+}
+
+.ticket-info {
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid #ddd;
+}
+
+.qr-code img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.seat-info {
+    margin-left: 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+.ticket-footer {
+    background: #ffecec;
+    color: #c00;
+    text-align: center;
+    padding: 10px;
+    font-size: 13px;
+}
